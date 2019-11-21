@@ -9,7 +9,7 @@ class App extends Component{
     }
 
     componentDidMount() {
-        axios.get('/hello')
+        axios.get('http://localhost:5000/hello')
             .then(res => this.setState({hello: res.data}) )
             .catch(err => console.log(err) )
     }
