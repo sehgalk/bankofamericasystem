@@ -7,6 +7,7 @@ const pool = new Pool({
   port: 5432,
 })
 
+pool.connect()
 //GET all Applications request
 const getApplications = (request, response) => {
     pool.query('SELECT AppID, AppFullName FROM aitwithmrd', (error, results) => {
