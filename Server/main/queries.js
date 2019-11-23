@@ -2,19 +2,26 @@ const Pool = require('pg').Pool
 const pool = new Pool({
   user: 'kritisehgal',
   host: 'localhost',
-  database: 'aitwithmrd',
+  database: 'kritisehgal',
   password: 'kritis',
   port: 5432,
 })
-
 pool.connect()
+
+
 //GET all Applications request
 const getApplications = (request, response) => {
     pool.query('SELECT AppID, AppFullName FROM aitwithmrd', (error, results) => {
         if (error){
             throw error
         }
-        response.status(200).json(results.row)
+        if(results) {
+            console.log(`showing results ${results} rows: ${results.rows}`)
+        }
+        else {
+            console.log("print hellp k")
+        }
+        response.status(200).json(results.rows)
     })
 }
 
@@ -27,7 +34,14 @@ const getApplicationByID = (request, response) => {
         if (error) {
             throw error
         }
-        response.status(200).json(results.row)
+        if(results) {
+            console.log('showing results ${results} rows: ${results.rows}')
+        }
+        else {
+            console.log("print hellp k")
+        }
+        console.log(results)
+        response.status(200).json(results.rows)
     })
 }
 

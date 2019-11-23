@@ -5,23 +5,31 @@ import axios from 'axios';
 
 class App extends Component{
     state = {
-        hello: null
+        applications: null
     }
 
     componentDidMount() {
         axios.get('http://localhost:5000/applications')
-            .then(res => this.setState({hello: res.data}) )
+            .then(res => {
+                console.log(res.data)
+                this.setState({applications: res.data})
+            })
             .catch(err => console.log(err) )
     }
 
     render() {
+    const applicationList = this.state.applications ? this.state.applications.map((app) => {
         return (
-            <div>
-                {this.state.hello
-                 ? <div> {this.state.hello} </div>
-                 : null }
-            </div>
+            <li>{app.appfullname}</li>
+        )
+    }): null
+
+        return (
+        <div>
+        <ul> {applicationList} </ul>
+        </div>
         );
+
     }
 }
 
